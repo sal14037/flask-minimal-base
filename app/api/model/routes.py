@@ -10,14 +10,14 @@ api = ModelDto.api
 _model = ModelDto.model
 
 @api.route('/')
-@api.response(404, 'Medical product not found.')
+@api.response(404, 'Model not found.')
 class Model(Resource):
 
-    @api.doc('Create a new medicical product')
+    @api.doc('Create a new model')
     @api.marshal_with(_model)
     @api.expect(_model)
     def post(self):
-        """Create a new medicical product"""
+        """Create a new model"""
         model = model_service.create_model(api.payload)
         if not model:
             api.abort(404)
@@ -25,7 +25,7 @@ class Model(Resource):
             return model
 
 @api.route('/<int:id>')
-@api.param('id', 'The medicine identifier')
+@api.param('id', 'The model identifier')
 @api.response(404, 'Model not found.')
 class ModelWithID(Resource):
     @api.doc('Get model')
